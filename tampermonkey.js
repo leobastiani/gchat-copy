@@ -153,13 +153,18 @@
                             const el = document.createElement('textarea');
                             const threadId = e.getAttribute("data-topic-id");
                             if (inIframe()) {
-                                // The new mail.google.com/chat application uses iframes that point to chat.google.com
-                                // Rooms are now renamed to spaces. Getting the space id from an attribute in the element
-                                const roomId = e.getAttribute('data-p').match(/space\/([^\\"]*)/)[1];
-                                el.value = `https://mail.google.com/chat/#chat/space/${roomId}/${threadId}`;
+                              // The new mail.google.com/chat application uses iframes that point to chat.google.com
+                              // Rooms are now renamed to spaces. Getting the space id from an attribute in the element
+                              const roomId = e
+                                .getAttribute("data-p")
+                                .match(/space\/([^\\"]*)/)[1];
+                              el.value = `https://mail.google.com/chat/u/1/#chat/space/${roomId}/${threadId}`;
                             } else {
-                                const roomId = window.location.pathname.match(/\/room\/([^\?\/]*)/)[1];
-                                el.value = `https://chat.google.com/room/${roomId}/${threadId}`;
+                              const roomId =
+                                window.location.pathname.match(
+                                  /\/room\/([^\?\/]*)/
+                                )[1];
+                              el.value = `https://chat.google.com/u/1/room/${roomId}/${threadId}`;
                             }
                             document.body.appendChild(el);
                             el.select();
